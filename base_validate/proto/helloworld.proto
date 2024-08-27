@@ -1,0 +1,20 @@
+syntax = "proto3";
+option go_package = ".;proto";
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+
+service Hello {
+  rpc Hello (HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {
+  string name = 1;
+  uint64 age = 2 [(validate.rules).uint64.gt = 999];
+  google.protobuf.Timestamp add_time = 3;
+}
+
+message HelloResponse {
+  string message = 1;
+}
